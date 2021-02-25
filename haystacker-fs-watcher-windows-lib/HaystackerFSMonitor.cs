@@ -3,12 +3,30 @@ using System.IO;
 
 namespace haystacker_fs_watcher_windows_lib
 {
+    public struct FSChangeNotification
+    {
+        public FSChangeNotification(int a, string b)
+        {
+            this.a = a;
+            this.b = b;
+        }
+
+        int a;
+        string b;
+    }
+
     sealed public class HaystackerFSMonitor
     {
         [DllExport("testString")]
         public static String TestString()
         {
             return "This comes from C#";
+        }
+
+        [DllExport("pollChangeNotification")]
+        public static FSChangeNotification PollChangeNotification()
+        {
+            return new FSChangeNotification(43, "aaaa");
         }
 
         private static void Run()
